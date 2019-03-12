@@ -1,17 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+// 引入入口文件
 import Home from './views/Home.vue'
+import pageDesign from './views/pageDesign'
+
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+NProgress.inc(0.2)
+NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/',
+      name: 'pageDesign',
+      component: pageDesign
     },
     {
       path: '/about',
@@ -23,3 +36,14 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  NProgress.start()
+  next()
+})
+
+router.afterEach((to, from) => {
+  NProgress.done()
+})
+
+export default router
