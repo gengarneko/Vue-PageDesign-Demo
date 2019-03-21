@@ -9458,9 +9458,9 @@ vuex-router-sync@^5.0.0:
   resolved "http://registry.npm.taobao.org/vuex-router-sync/download/vuex-router-sync-5.0.0.tgz#1a225c17a1dd9e2f74af0a1b2c62072e9492b305"
   integrity sha1-GiJcF6Hdni90rwobLGIHLpSSswU=
 
-vuex@^3.0.1:
+vuex@^3.1.0:
   version "3.1.0"
-  resolved "http://registry.npm.taobao.org/vuex/download/vuex-3.1.0.tgz#634b81515cf0cfe976bd1ffe9601755e51f843b9"
+  resolved "http://registry.npm.taobao.org/vuex/download/vuex-3.1.0.tgz?cache=0&other_urls=http%3A%2F%2Fregistry.npm.taobao.org%2Fvuex%2Fdownload%2Fvuex-3.1.0.tgz#634b81515cf0cfe976bd1ffe9601755e51f843b9"
   integrity sha1-Y0uBUVzwz+l2vR/+lgF1XlH4Q7k=
 
 w3c-hr-time@^1.0.1:
