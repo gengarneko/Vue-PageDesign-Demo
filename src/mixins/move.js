@@ -23,7 +23,7 @@ var move = {
         x: e.pageX,
         y: e.pageY
       })
-    },
+    }
     // 鼠标松开事件
   }
 }

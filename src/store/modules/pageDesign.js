@@ -1,5 +1,5 @@
 // const generate = require('nanoid/generate')
-
+// 全局属性
 const state = {
   // 01 背景画布区域对象
   dPage: {
@@ -99,7 +99,7 @@ const state = {
     'rgba(199, 21, 133, 0.46)'
   ]
 }
-
+// 获取属性
 const getters = {
   dPage (state) { // 01
     return state.dPage
@@ -169,8 +169,93 @@ const getters = {
   }
 
 }
+// 全局方法
+const actions = {
+  /**
+   * 保存操作历史，
+   * 修改数据、移动完成后都会自动保存
+   * 同时会保存当前激活的组件的 uuid，方便撤回时自动激活
+   */
+  pushHistory (store) {
+    // 记录数组，保存历史操作
+    let history = store.state.dHistory
+    // 记录数组，保存历史操作中激活的组件
+    let uuidHistory = store.state.dActiveUuidHistory
+    // 记录数组，保存历史操作中的页面
+    let pageHistory = store.state.dPageHistory
+    // 控制历史操作的对象
+    let historyParams = store.state.dHistoryParams
+
+    // 下标不等于 -1 表示已存在历史操作记录
+    // 下标小于历史长度-1，说明不是在末尾添加记录
+    // 需要先删除掉下标之后的数据，否则会出现错乱
+    if (historyParams.index < history.length - 1) {
+      let index = historyParams.index + 1
+      let len = history.length - index
+      // 删除下标之后 len 个数据
+      history.splice(index, len)
+      uuidHistory.splice(index, len)
+      pageHistory.splice(index, len)
+      // 修改历史操作长度
+      historyParams.length = history.length
+    }
+    // 将当前操作放入记录数组
+    history.push(JSON.stringify(store.state.dWidgets))
+    // 选中的组件 ID 放入记录数组
+    uuidHistory.push(store.state.dActiveElement.uuid)
+    // 当前容器数据存入记录数组
+    pageHistory.push(JSON.stringify(store.state.dPage))
+
+    // 我们限定历史记录最多存 10 条
+    if (history.length > 10) {
+      history.splice(0, 1)
+      uuidHistory.splice(0, 1)
+      pageHistory.splice(0, 1)
+    }
+    // 如果页面历史的长度比历史长度长 2，删掉一个记录
+    if (pageHistory - 1 > history.length) {
+      pageHistory.splice(0, 1)
+    }
+    // 记录的 index 比历史长度小 1，长度相等
+    historyParams.index = history.length - 1
+    historyParams.length = history.length
+  },
+  /**
+   * 操作历史记录
+   * action为undo表示撤销
+   * action为redo表示重做
+   */
+  handleHistory (store, action) {
+    let history = store.state.dHistory
+    let uuidHistory = store.state.dActiveUuidHistory
+    let pageHistory = store.state.dPageHistory
+    let historyParams = store.state.dHistoryParams
+
+    let uuid = '-1'
+
+    // 进行撤销操作
+    if (action === 'undo') {
+      // 下标向前移动一位
+      historyParams.index -= 1
+      // 如果下标 >= 0，直接取出历史记录
+      if (historyParams.index >= 0) {
+        store.state.dWidgets = JSON.parse(history[historyParams.index])
+        store.state.dPage = JSON.parse(pageHistory[historyParams.index + 1])
+        uuid = uuidHistory[historyParams.index]
+      } else if (historyParams.length < 10) {
+        // 否则如果历史记录长度小于10，则设置组件为空
+        historyParams.index = -1
+        store.state.dWidgets = []
+        store.state.dPage = JSON.parse(pageHistory[0])
+      } else {
+        historyParams.index = -1
+      }
+    }
+  }
+}
 
 export default {
   state,
+  actions,
   getters
 }
