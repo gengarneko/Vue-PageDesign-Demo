@@ -3,6 +3,7 @@ import Router from 'vue-router'
 // 引入入口文件
 import Home from './views/Home.vue'
 import pageDesign from './views/pageDesign'
+import pageDesignIndex from './views/pageDesign/Index'
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -23,6 +24,11 @@ const router = new Router({
     },
     {
       path: '/',
+      name: 'pageDesignIndex',
+      component: pageDesignIndex
+    },
+    {
+      path: '/page',
       name: 'pageDesign',
       component: pageDesign
     },
