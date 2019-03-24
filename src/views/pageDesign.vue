@@ -132,9 +132,9 @@ export default {
     //   // alert(n)
     //   console.log(n)
     // },
-    handleButton() {
+    handleButton () {
       let nn = this.getScreen
-      console.log(nn);
+      console.log(nn)
     },
     getScreen () {
       let screen = this.$refs['page-design']

@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // 引入入口文件
-import Home from './views/Home.vue'
 import pageDesign from './views/pageDesign'
-import pageDesignIndex from './views/pageDesign/Index'
+import pageDesignIndex from './views/wireless/Index'
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -17,11 +16,6 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    {
-      path: '/home',
-      name: 'home',
-      component: Home
-    },
     {
       path: '/',
       name: 'pageDesignIndex',
