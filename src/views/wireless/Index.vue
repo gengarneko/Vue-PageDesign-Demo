@@ -34,8 +34,8 @@
         <!-- 按钮组 -->
         <div class="btn">
           <Button size="large">文件列表</Button>
-          <Button size="large" @click="">保存</Button>
-          <Button size="large" @click="" type="warning">生成代码</Button>
+          <Button size="large" @click="save()">保存</Button>
+          <Button size="large" @click="build()" type="warning">生成代码</Button>
         </div>
         <!-- 用户信息组件 -->
         <!-- <user-info></user-info> -->
@@ -184,6 +184,9 @@
 import { mapGetters, mapActions } from 'vuex'
 import { shortcuts } from '@/mixins/shortcuts'
 import zoomControl from '@/components/pageDesign/zoomControl'
+import widgetPanel from '@/components/wireless/widgetPanel'
+import pageDesign from '@/components/wireless/pageDesign'
+import stylePanel from '@/components/wireless/stylePanel'
 // import sizeControl from '@/common/sizeControl'
 export default {
   name: 'pageDesignIndex',
@@ -342,7 +345,10 @@ export default {
   },
   mixins: [shortcuts],
   components: {
-    zoomControl
+    zoomControl,
+    widgetPanel,
+    pageDesign,
+    stylePanel
     // sizeControl
   },
   methods: {
@@ -353,6 +359,12 @@ export default {
         return data.name
       }
       return labels[index]
+    },
+    save () {
+      alert('保存')
+    },
+    build () {
+      alert('生成代码')
     }
   }
 }
@@ -405,6 +417,14 @@ export default {
         min-width 280px
         Button
           margin 0 6px
+  .page-design-index-wrap
+    width 100%
+    height 100%
+    flex 1
+    display flex
+    overflow hidden
+    .page-design-wrap
+      flex 1
 .operation
   z-index 1000
   width 30px

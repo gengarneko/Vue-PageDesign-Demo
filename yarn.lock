@@ -9516,6 +9516,11 @@ vue@^2.6.6:
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.6.7.tgz#254f188e7621d2d19ee28d0c0442c6d21b53ae2d"
   integrity sha1-JU8YjnYh0tGe4o0MBELG0htTri0=
 
+vuescroll@^4.11.2:
+  version "4.11.2"
+  resolved "http://registry.npm.taobao.org/vuescroll/download/vuescroll-4.11.2.tgz#e56bc61b3f7e4b994a1d1f48b04a89c26259c7a5"
+  integrity sha1-5WvGGz9+S5lKHR9IsEqJwmJZx6U=
+
 vuex-router-sync@^5.0.0:
   version "5.0.0"
   resolved "http://registry.npm.taobao.org/vuex-router-sync/download/vuex-router-sync-5.0.0.tgz#1a225c17a1dd9e2f74af0a1b2c62072e9492b305"

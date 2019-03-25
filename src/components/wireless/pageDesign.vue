@@ -1,90 +1,90 @@
 <template>
-<vue-scroll :ops="ops">
-  <div
-    id="page-design"
-    ref="page-design"
-  >
-    <!-- 包裹着画布的外部容器 -->
+  <vue-scroll>
     <div
-      class="design-out"
-      :style="{
-        width: dPage.width * dZoom / 100 + 120 + 'px',
-        height: dPage.height * dZoom / 100 + 120 + 'px',
-        opacity: 1 - ( dZoom < 100 ? dPage.tag : 0 ),
-      }"
+      id="page-design"
+      ref="page-design"
     >
-      <!-- 如果 zoom 超过 100 那么就从左上角开始变化 -->
+      <!-- 包裹着画布的外部容器 -->
       <div
-        class="design-canvas"
-        :data-type="dPage.type"
-        :data-uuid="dPage.uuid"
-        :id="pageDesignCanvasId"
+        class="design-out"
         :style="{
-          width: dPage.width + 'px',
-          height: dPage.height + 'px',
-          transform: 'scale(' + dZoom / 100 + ')',
-          transformOrigin: ( dZoom >= 100 ? 'center' : 'left' ) + ' top',
-          backgroundColor: dPage.backgroundColor,
-          backgroundImage: 'url(\'' + ( dPage.backgroundImage ? dPage.backgroundImage : '' ) + '\')',
-          opacity: dPage.opacity + ( dZoom < 100 ? dPage.tag : 0 )
+          width: dPage.width * dZoom / 100 + 120 + 'px',
+          height: dPage.height * dZoom / 100 + 120 + 'px',
+          opacity: 1 - ( dZoom < 100 ? dPage.tag : 0 ),
         }"
       >
-        <!-- 背景网格 -->
-        <grid-size></grid-size>
-        <!-- 组件 -->
-        <component
-          :is="layer.type"
-          class="layer"
-          :class="{
-            'layer-active': getIsActive(layer.uuid),
-            'layer-hover': layer.uuid === dHoverUuid || dActiveElement.parent === layer.uuid
+        <!-- 如果 zoom 超过 100 那么就从左上角开始变化 -->
+        <div
+          class="design-canvas"
+          :data-type="dPage.type"
+          :data-uuid="dPage.uuid"
+          :id="pageDesignCanvasId"
+          :style="{
+            width: dPage.width + 'px',
+            height: dPage.height + 'px',
+            transform: 'scale(' + dZoom / 100 + ')',
+            transformOrigin: ( dZoom >= 100 ? 'center' : 'left' ) + ' top',
+            backgroundColor: dPage.backgroundColor,
+            backgroundImage: 'url(\'' + ( dPage.backgroundImage ? dPage.backgroundImage : '' ) + '\')',
+            opacity: dPage.opacity + ( dZoom < 100 ? dPage.tag : 0 )
           }"
-          :data-title="layer.type"
-          v-for="layer in getLayers()"
-          :key="layer.uuid"
-          :params="layer"
-          :parent="dPage"
-          :data-type="layer.type"
-          :data-uuid="layer.uuid"
         >
-          <!-- 仅支持两层嵌套的组合 -->
+          <!-- 背景网格 -->
+          <grid-size></grid-size>
+          <!-- 组件 -->
           <component
-            v-if="layer.isContainer"
-            :is="widget.type"
+            :is="layer.type"
             class="layer"
             :class="{
-              'layer-active': getIsActive(widget.uuid),
-              'layer-no-hover': dActiveElement.uuid !== widget.parent && dActiveElement.parent !== widget.parent,
-              'layer-hover': widget.uuid === dHoverUuid
+              'layer-active': getIsActive(layer.uuid),
+              'layer-hover': layer.uuid === dHoverUuid || dActiveElement.parent === layer.uuid
             }"
-            :data-title="widget.type"
-            v-for="widget in getChilds(layer.uuid)"
-            :key="widget.uuid"
-            :params="widget"
-            :parent="layer"
-            :data-type="widget.type"
-            :data-uuid="widget.uuid"
-          />
-        </component>
-        <!-- 参考线 -->
-        <ref-line v-if="dSelectWidgets.length"></ref-line>
-        <!-- 缩放控制 -->
-        <size-control v-if="dSelectWidgets.length"></size-control>
+            :data-title="layer.type"
+            v-for="layer in getLayers()"
+            :key="layer.uuid"
+            :params="layer"
+            :parent="dPage"
+            :data-type="layer.type"
+            :data-uuid="layer.uuid"
+          >
+            <!-- 仅支持两层嵌套的组合 -->
+            <component
+              v-if="layer.isContainer"
+              :is="widget.type"
+              class="layer"
+              :class="{
+                'layer-active': getIsActive(widget.uuid),
+                'layer-no-hover': dActiveElement.uuid !== widget.parent && dActiveElement.parent !== widget.parent,
+                'layer-hover': widget.uuid === dHoverUuid
+              }"
+              :data-title="widget.type"
+              v-for="widget in getChilds(layer.uuid)"
+              :key="widget.uuid"
+              :params="widget"
+              :parent="layer"
+              :data-type="widget.type"
+              :data-uuid="widget.uuid"
+            />
+          </component>
+          <!-- 参考线 -->
+          <ref-line v-if="dSelectWidgets.length"></ref-line>
+          <!-- 缩放控制 -->
+          <size-control v-if="dSelectWidgets.length"></size-control>
+        </div>
       </div>
+      <button @click="handleButton()">
+        {{ dZoom }} - 测试按钮
+      </button>
     </div>
-    <button @click="handleButton()">
-      {{ dZoom }} - 测试按钮
-    </button>
-  </div>
-</vue-scroll>
+  </vue-scroll>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { move } from '../mixins/move'
-import gridSize from '../common/gridSize'
-import refLine from '../common/refLine'
-import sizeControl from '../common/sizeControl'
+import { move } from '@/mixins/move'
+import gridSize from '@/common/gridSize'
+import refLine from '@/common/refLine'
+import sizeControl from '@/common/sizeControl'
 
 const NAME = 'page-design'
 
@@ -212,7 +212,7 @@ export default {
   .design-out
     position: relative
     margin: 0 auto
-    padding: 60px
+    padding: 50px
     .design-canvas
       position: relative
       margin: 0 auto
