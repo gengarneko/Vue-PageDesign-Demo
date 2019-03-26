@@ -143,11 +143,6 @@ export default {
         return uuid === this.dActiveElement.uuid
       }
     }
-  },
-  mounted () {
-    console.log(this.dActiveElement.uuid)
-    console.log(this.dPage)
-    console.log(this.dWidgets)
   }
 }
 </script>

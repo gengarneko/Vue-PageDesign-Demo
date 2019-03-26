@@ -6,7 +6,7 @@
     <!-- 头部导航 -->
     <!-- 引入 iview 栅格 -->
     <Row id="home-header">
-      <Col class="header-col" span="6">
+      <i-col class="header-col" span="6">
         <!-- logo 图片区域 -->
         <div class="header-logo">
           <div class="logo">
@@ -24,13 +24,14 @@
             :render-format="format"
           ></Cascader>
         </div>
-      </Col>
-      <Col class="header-col header-zoom" span="12">
+      </i-col>
+
+      <i-col class="header-col header-zoom" span="12">
         <!-- 缩放组件 -->
         <zoom-control></zoom-control>
-      </Col>
+      </i-col>
 
-      <Col class="header-col header-btns" span="6">
+      <i-col class="header-col header-btns" span="6">
         <!-- 按钮组 -->
         <div class="btn">
           <Button size="large">文件列表</Button>
@@ -38,8 +39,8 @@
           <Button size="large" @click="build()" type="warning">生成代码</Button>
         </div>
         <!-- 用户信息组件 -->
-        <!-- <user-info></user-info> -->
-      </Col>
+      </i-col>
+
     </Row>
     <!-- 主要内容容器 -->
     <div class="page-design-index-wrap">
@@ -64,19 +65,22 @@
           @click="dActiveElement.uuid !== '-1' ? handle('copy') : ''"
         >
           <Tooltip content="复制" placement="right-start">
-            <Icon type="md-copy" />
+            <div class="iconfont icon-fuzhi"></div>
+            <icon-svg icon-class="icon-fuzhi" />
           </Tooltip>
         </li>
+        <icon-svg icon-class="icon-fuzhi" />
+        <icon-svg icon-class="icon-fuzhi" />
         <!-- 粘贴组件/图片容器 -->
-        <li
+        <!-- <li
           class="operation-item"
           :class="{'disable' : dCopyElement.length === 0}"
           @click="dCopyElement.length !== 0 ? handle('paste') : ''"
         >
           <Tooltip content="粘贴" placement="right-start">
-            <Icon type="ios-clipboard" />
+            <div class="iconfont icon-fuzhi"></div>
           </Tooltip>
-        </li>
+        </li> -->
         <!-- 分割线 -->
         <Divider class="divider"/>
         <!-- 上移图片容器 -->
@@ -86,7 +90,7 @@
           @click="dActiveElement.uuid !== '-1' ? handle('copy') : ''"
         >
           <Tooltip content="上移" placement="right-start">
-            <Icon type="md-arrow-round-up" />
+            <div class="iconfont icon-shangyi"></div>
           </Tooltip>
         </li>
         <!-- 下移图片容器 -->
@@ -96,13 +100,13 @@
           @click="dCopyElement.length !== 0 ? handle('paste') : ''"
         >
           <Tooltip content="下移" placement="right-start">
-            <Icon type="md-arrow-round-down" />
+            <div class="iconfont icon-xiayi"></div>
           </Tooltip>
         </li>
         <!-- 分割线 -->
         <Divider class="divider"/>
         <!-- 设置网格线 -->
-        <li
+        <!-- <li
           class="operation-item"
           :class="{'operation-item-active' : showGridSizeList}"
           @click.stop="showGridSizeList = !showGridSizeList"
@@ -121,9 +125,9 @@
               <i class="iconfont icon-selected" v-if="gridSizeIndex === index"></i>
             </li>
           </ul>
-        </li>
+        </li> -->
         <!-- 显示辅助线 -->
-        <li
+        <!-- <li
           class="operation-item"
           :class="{'operation-item-active' : dShowRefLine}"
           @click.stop="showRefLine(!dShowRefLine)"
@@ -131,9 +135,9 @@
           <Tooltip content="辅助线" placement="right-start">
             <Icon type="ios-grid-outline" />
           </Tooltip>
-        </li>
+        </li> -->
         <!-- 分割线 -->
-        <Divider class="divider"/>
+        <!-- <Divider class="divider"/> -->
         <!-- 删除目标组件 -->
         <li
           class="operation-item"
@@ -141,7 +145,7 @@
           @click="dActiveElement.uuid !== '-1' ? handle('delete') : ''"
         >
           <Tooltip content="删除" placement="right-start">
-            <Icon type="md-trash" />
+            <div class="iconfont icon-shanchu"></div>
           </Tooltip>
         </li>
       </ul>
@@ -445,10 +449,23 @@ export default {
       align-items center
       padding 3px 0
       line-height 1
+      color #6E747D
+      &:nth-child(3)
+      &:nth-child(4)
+        .iconfont:before
+          height 16px
+          width 16px
+          font-size 16px
+      .iconfont
+        height 20px
+        width 20px
+        &::before
+          height 18px
+          width 18px
+          font-size 18px
       &:hover
         cursor pointer
         background #eee
-        color #ff7f00
       .grid-selecter
         position absolute
         width 60px

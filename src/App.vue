@@ -30,6 +30,7 @@ export default {
 <style lang="stylus">
 #appIndex
   min-width 1180px
+  color #6E747D
   .viewWrap
     background-color $color-white
     // min-height calc(110vh - 110px)

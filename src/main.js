@@ -15,6 +15,10 @@ import 'iview/dist/styles/iview.css'
 // 引入滚动条插件
 import vuescroll from 'vuescroll'
 import 'vuescroll/dist/vuescroll.css'
+// 引入图标库
+// import '@/icons/iconfont.css'
+import '@/icons/iconfont.js'
+import IconSvg from '@/common/iconSvg'
 
 Vue.config.productionTip = false
 
@@ -22,6 +26,8 @@ Vue.use(Vuex)
 Vue.use(validator)
 Vue.use(toast)
 Vue.use(iView)
+// 全局注册 icon-svg
+Vue.component('icon-svg', IconSvg)
 // Vue.use(ElementUI)
 Vue.use(vuescroll)
 Vue.prototype.$vuescrollConfig = {

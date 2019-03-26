@@ -163,13 +163,14 @@ export default {
     justify-content flex-start
     .widget-item
       width 100%
-      padding 20px 22px 20px 20px
+      min-height 50px
+      // padding 20px 22px 20px 20px
+      margin 20px auto
       cursor pointer
       display flex
       flex-direction column
       justify-content space-between
       align-items center
-      color #666666
       font-family MicrosoftYaHei-Bold
       font-weight 700
       font-size 12px
