@@ -31,6 +31,14 @@
         >
           <!-- 背景网格 -->
           <grid-size></grid-size>
+          <hotzone
+            :image="image"
+            :zonesInit="zones"
+            @add="handleAdd"
+            @remove="handleRemove"
+            @change="handleChange"
+          >
+          </hotzone>
           <!-- 组件 -->
           <component
             :is="layer.type"
@@ -85,6 +93,7 @@ import { move } from '@/mixins/move'
 import gridSize from '@/common/gridSize'
 import refLine from '@/common/refLine'
 import sizeControl from '@/common/sizeControl'
+import hotzone from '@/components/hotzone/hotzone'
 
 const NAME = 'page-design'
 
@@ -96,12 +105,23 @@ export default {
     return {
       // page: this.$store.getters.dZoom
       // page: this.$store.getters
+      image: 'https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-697888.jpg',
+      zones: [
+        {
+          heightPer: 0.4374,
+          leftPer: 0.1153,
+          topPer: 0.238,
+          widthPer: 0.2827,
+          url: 'https://baidu.com'
+        }
+      ]
     }
   },
   components: {
     gridSize,
     refLine,
-    sizeControl
+    sizeControl,
+    hotzone
   },
   computed: {
     ...mapGetters([
@@ -128,6 +148,22 @@ export default {
       'selectWidget', // 选择组件
       'deleteWidget' // 删除组件
     ]),
+    handleAdd (zone) {
+      zone.url = this.zones.length ? '' : 'https://baidu.com'
+      this.zones.push(zone)
+    },
+    handleRemove (index) {
+      this.zones.splice(index, 1)
+    },
+    handleChange () {
+      console.log('Zones data update')
+    },
+    getZoneStyle (val) {
+      return `${(val || 0) * 100}%`
+    },
+    handleZoneClick (url) {
+      url && window.open(url)
+    },
     // handleTestButton () {
     //   var n = this.$store.state
     //   // var i = this.$store.getters.dPage

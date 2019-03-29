@@ -191,6 +191,7 @@ import zoomControl from '@/components/pageDesign/zoomControl'
 import widgetPanel from '@/components/wireless/widgetPanel'
 import pageDesign from '@/components/wireless/pageDesign'
 import stylePanel from '@/components/wireless/stylePanel'
+import hotzone from '@/components/hotzone/hotzone'
 // import sizeControl from '@/common/sizeControl'
 export default {
   name: 'pageDesignIndex',
@@ -352,7 +353,8 @@ export default {
     zoomControl,
     widgetPanel,
     pageDesign,
-    stylePanel
+    stylePanel,
+    hotzone
     // sizeControl
   },
   methods: {

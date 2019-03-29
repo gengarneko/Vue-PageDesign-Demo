@@ -1,5 +1,5 @@
 <template>
-<div>gridSize</div>
+<div></div>
 </template>
 
 <script>

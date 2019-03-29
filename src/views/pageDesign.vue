@@ -30,9 +30,9 @@
         }"
       >
         <!-- 背景网格 -->
-        <grid-size></grid-size>
+        <hotzone></hotzone>
         <!-- 组件 -->
-        <component
+        <!-- <component
           :is="layer.type"
           class="layer"
           :class="{
@@ -47,7 +47,6 @@
           :data-type="layer.type"
           :data-uuid="layer.uuid"
         >
-          <!-- 仅支持两层嵌套的组合 -->
           <component
             v-if="layer.isContainer"
             :is="widget.type"
@@ -65,7 +64,11 @@
             :data-type="widget.type"
             :data-uuid="widget.uuid"
           />
-        </component>
+        </component> -->
+        <!-- 热区组件 -->
+        <hotzone
+
+        ></hotzone>
         <!-- 参考线 -->
         <ref-line v-if="dSelectWidgets.length"></ref-line>
         <!-- 缩放控制 -->
@@ -82,9 +85,10 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { move } from '../mixins/move'
-import gridSize from '../common/gridSize'
+// import gridSize from '../common/gridSize'
 import refLine from '../common/refLine'
 import sizeControl from '../common/sizeControl'
+import hotzone from '../components/hotzone/hotzone'
 
 const NAME = 'page-design'
 
@@ -99,9 +103,9 @@ export default {
     }
   },
   components: {
-    gridSize,
     refLine,
-    sizeControl
+    sizeControl,
+    hotzone
   },
   computed: {
     ...mapGetters([
@@ -128,6 +132,22 @@ export default {
       'selectWidget', // 选择组件
       'deleteWidget' // 删除组件
     ]),
+    handleAdd (zone) {
+      zone.url = this.zones.length ? '' : 'https://baidu.com'
+      this.zones.push(zone)
+    },
+    handleRemove (index) {
+      this.zones.splice(index, 1)
+    },
+    handleChange () {
+      console.log('Zones data update')
+    },
+    getZoneStyle (val) {
+      return `${(val || 0) * 100}%`
+    },
+    handleZoneClick (url) {
+      url && window.open(url)
+    },
     // handleTestButton () {
     //   var n = this.$store.state
     //   // var i = this.$store.getters.dPage

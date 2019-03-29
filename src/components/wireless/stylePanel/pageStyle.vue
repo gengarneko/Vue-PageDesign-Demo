@@ -78,13 +78,13 @@ export default {
   },
   mounted () {
     // console.log(this.$data)
-    var obj = JSON.parse(JSON.stringify(this.$data.imgInfo))
-    let k = obj.width
+    // var obj = JSON.parse(JSON.stringify(this.$data.imgInfo))
+    // let k = obj.width
     // console.log(this.$data.imgInfo)
     // console.log(JSON.parse(JSON.stringify(this.imgInfo)))
-    let i = JSON.parse(JSON.stringify(this.imgInfo))
-    this.dPage.width = i.width
-    this.dPage.height = i.height
+    // let i = JSON.parse(JSON.stringify(this.imgInfo))
+    // this.dPage.width = i.width
+    // this.dPage.height = i.height
     // console.log(i)
     // console.log(this.dPage)
   },
